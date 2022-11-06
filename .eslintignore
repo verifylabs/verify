@@ -2,3 +2,6 @@
 **/*.js
 generated
 design-system
+packages/contract/types
+packages/contract/artifacts
+packages/contract/cache
