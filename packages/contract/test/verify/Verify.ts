@@ -14,9 +14,10 @@ describe('Verify contract', () => {
   }
 
   async function createContent(verify: Contract) {
+    const signer = (await ethers.getSigners())[0];
     const data = JSON.stringify({ hello: 'world' });
     const id = '123';
-    const tx = await verify.createContent(data, id);
+    const tx = await verify.createContent(data, id, signer.address);
     await tx.wait();
     const decodedData = ethers.utils.defaultAbiCoder.decode(
       ['string', 'string', 'address', 'uint256'],

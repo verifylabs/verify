@@ -22,31 +22,30 @@ contract Verify {
         OWNER = _owner;
     }
 
-    function createContent(string memory data, string memory id)
-        public
-        returns (Content memory)
-    {
+    function createContent(
+        string memory data,
+        string memory id,
+        address owner
+    ) public returns (Content memory) {
         require(contents[id].timestamp == 0, "Id already registered");
-        Content memory new_content = Content(
-            data,
-            id,
-            msg.sender,
-            block.timestamp
-        );
+        Content memory new_content = Content(data, id, owner, block.timestamp);
         contents[id] = new_content;
-        contentsByAddress[msg.sender].push(new_content);
+        contentsByAddress[owner].push(new_content);
         return new_content;
     }
 
-    function createReport(string memory id) public returns (uint256) {
+    function createReport(string memory id, address owner)
+        public
+        returns (uint256)
+    {
         require(contents[id].timestamp != 0, "Content not found!");
         require(
-            reportJustOnce(reports[id], msg.sender),
+            reportJustOnce(reports[id], owner),
             "Just one report for address!"
         );
 
         address[] storage last_addresses = reports[id];
-        last_addresses.push(msg.sender);
+        last_addresses.push(owner);
 
         return last_addresses.length;
     }

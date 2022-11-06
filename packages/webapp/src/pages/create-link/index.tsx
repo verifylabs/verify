@@ -4,7 +4,7 @@ import { factories } from "@verify/contract";
 import type { GetServerSidePropsContext } from "next";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { useAccount, useContract, useSigner } from "wagmi";
+import { useContractRead } from "wagmi";
 import type { LinksQuery } from "~/generated/graphql";
 import { LinksDocument } from "~/generated/graphql";
 import { initApollo, Layout } from "~/systems/Core";
@@ -13,14 +13,12 @@ import { withSessionProps } from "~/systems/Session";
 import { Button, LinkInput } from "~/systems/UI";
 
 const CreateLink = () => {
-  const { address } = useAccount();
-  const { data: signer } = useSigner();
   // const { data } = useLinksQuery({ variables: { address: address as any } });
   // const [links, setLinks] = useState([]);
-  const contract = useContract({
+  const contract = useContractRead({
     addressOrName: "0x90c84237fDdf091b1E63f369AF122EB46000bc70",
     contractInterface: factories.Verify__factory.abi,
-    signerOrProvider: signer,
+    functionName: "getContentList",
   });
 
   const router = useRouter();
