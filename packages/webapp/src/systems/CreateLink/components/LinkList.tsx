@@ -26,7 +26,7 @@ export function LinkList({ links }: LinkListProps) {
         </Heading>
         <Button leftIcon="Eye">See all</Button>
       </Flex>
-      <Focus.ArrowNavigator asChild>
+      <Focus.ArrowNavigator>
         <Stack gap="$1" direction="column">
           {(links || []).slice(0, 3).map((link) => (
             <LinkItem key={link.id} link={link} />

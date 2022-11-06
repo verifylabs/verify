@@ -41,25 +41,38 @@ export declare namespace Verify {
 
 export interface VerifyInterface extends utils.Interface {
   functions: {
+    "OWNER()": FunctionFragment;
     "contents(string)": FunctionFragment;
+    "contentsByAddress(address,uint256)": FunctionFragment;
     "createContent(string,string)": FunctionFragment;
     "createReport(string)": FunctionFragment;
+    "getContent(string)": FunctionFragment;
+    "getContentList(address)": FunctionFragment;
     "getReports(string)": FunctionFragment;
     "reports(string,uint256)": FunctionFragment;
   };
 
   getFunction(
     nameOrSignatureOrTopic:
+      | "OWNER"
       | "contents"
+      | "contentsByAddress"
       | "createContent"
       | "createReport"
+      | "getContent"
+      | "getContentList"
       | "getReports"
       | "reports"
   ): FunctionFragment;
 
+  encodeFunctionData(functionFragment: "OWNER", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "contents",
     values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "contentsByAddress",
+    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "createContent",
@@ -67,6 +80,14 @@ export interface VerifyInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "createReport",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getContent",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getContentList",
     values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
@@ -78,13 +99,23 @@ export interface VerifyInterface extends utils.Interface {
     values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
   ): string;
 
+  decodeFunctionResult(functionFragment: "OWNER", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "contents", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "contentsByAddress",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(
     functionFragment: "createContent",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
     functionFragment: "createReport",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "getContent", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "getContentList",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "getReports", data: BytesLike): Result;
@@ -120,8 +151,23 @@ export interface Verify extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
+    OWNER(overrides?: CallOverrides): Promise<[string]>;
+
     contents(
       arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<
+      [string, string, string, BigNumber] & {
+        data: string;
+        id: string;
+        owner: string;
+        timestamp: BigNumber;
+      }
+    >;
+
+    contentsByAddress(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<
       [string, string, string, BigNumber] & {
@@ -143,6 +189,16 @@ export interface Verify extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    getContent(
+      id: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<[Verify.ContentStructOutput]>;
+
+    getContentList(
+      addr: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<[Verify.ContentStructOutput[]]>;
+
     getReports(
       id: PromiseOrValue<string>,
       overrides?: CallOverrides
@@ -155,8 +211,23 @@ export interface Verify extends BaseContract {
     ): Promise<[string]>;
   };
 
+  OWNER(overrides?: CallOverrides): Promise<string>;
+
   contents(
     arg0: PromiseOrValue<string>,
+    overrides?: CallOverrides
+  ): Promise<
+    [string, string, string, BigNumber] & {
+      data: string;
+      id: string;
+      owner: string;
+      timestamp: BigNumber;
+    }
+  >;
+
+  contentsByAddress(
+    arg0: PromiseOrValue<string>,
+    arg1: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<
     [string, string, string, BigNumber] & {
@@ -178,6 +249,16 @@ export interface Verify extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  getContent(
+    id: PromiseOrValue<string>,
+    overrides?: CallOverrides
+  ): Promise<Verify.ContentStructOutput>;
+
+  getContentList(
+    addr: PromiseOrValue<string>,
+    overrides?: CallOverrides
+  ): Promise<Verify.ContentStructOutput[]>;
+
   getReports(
     id: PromiseOrValue<string>,
     overrides?: CallOverrides
@@ -190,8 +271,23 @@ export interface Verify extends BaseContract {
   ): Promise<string>;
 
   callStatic: {
+    OWNER(overrides?: CallOverrides): Promise<string>;
+
     contents(
       arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<
+      [string, string, string, BigNumber] & {
+        data: string;
+        id: string;
+        owner: string;
+        timestamp: BigNumber;
+      }
+    >;
+
+    contentsByAddress(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<
       [string, string, string, BigNumber] & {
@@ -213,6 +309,16 @@ export interface Verify extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    getContent(
+      id: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<Verify.ContentStructOutput>;
+
+    getContentList(
+      addr: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<Verify.ContentStructOutput[]>;
+
     getReports(
       id: PromiseOrValue<string>,
       overrides?: CallOverrides
@@ -228,8 +334,16 @@ export interface Verify extends BaseContract {
   filters: {};
 
   estimateGas: {
+    OWNER(overrides?: CallOverrides): Promise<BigNumber>;
+
     contents(
       arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    contentsByAddress(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -242,6 +356,16 @@ export interface Verify extends BaseContract {
     createReport(
       id: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    getContent(
+      id: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    getContentList(
+      addr: PromiseOrValue<string>,
+      overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     getReports(
@@ -257,8 +381,16 @@ export interface Verify extends BaseContract {
   };
 
   populateTransaction: {
+    OWNER(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     contents(
       arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    contentsByAddress(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -271,6 +403,16 @@ export interface Verify extends BaseContract {
     createReport(
       id: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    getContent(
+      id: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    getContentList(
+      addr: PromiseOrValue<string>,
+      overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     getReports(

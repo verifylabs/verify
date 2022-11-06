@@ -1,21 +1,27 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { cssObj } from "@fuel-ui/css";
 import { Box, Heading } from "@fuel-ui/react";
+import { factories } from "@verify/contract";
 import type { GetServerSidePropsContext } from "next";
 import { useRouter } from "next/router";
-import { useState } from "react";
-import { useAccount } from "wagmi";
+import { useEffect, useState } from "react";
+import { useAccount, useContract, useSigner } from "wagmi";
 import type { LinksQuery } from "~/generated/graphql";
-import { useLinksQuery, LinksDocument } from "~/generated/graphql";
+import { LinksDocument } from "~/generated/graphql";
 import { initApollo, Layout } from "~/systems/Core";
-import { LinkList } from "~/systems/CreateLink";
 import { useCreateLink } from "~/systems/CreateLink/hooks";
 import { withSessionProps } from "~/systems/Session";
 import { Button, LinkInput } from "~/systems/UI";
 
 const CreateLink = () => {
   const { address } = useAccount();
-  const { data } = useLinksQuery({ variables: { address: address as any } });
+  const { data: signer } = useSigner();
+  // const { data } = useLinksQuery({ variables: { address: address as any } });
+  // const [links, setLinks] = useState([]);
+  const contract = useContract({
+    addressOrName: "0x90c84237fDdf091b1E63f369AF122EB46000bc70",
+    contractInterface: factories.Verify__factory.abi,
+    signerOrProvider: signer,
+  });
 
   const router = useRouter();
   const [url, setURL] = useState((router.query.url as string) || "");
@@ -28,6 +34,13 @@ const CreateLink = () => {
   function handleCreate() {
     createLink(url);
   }
+
+  useEffect(() => {
+    // console.log("address", address);
+    // contract.callStatic.getContentList(address).then((res: any) => {
+    //   console.log("res", res);
+    // });
+  }, []);
 
   return (
     <Layout.Content css={styles.wrapper}>
@@ -47,7 +60,7 @@ const CreateLink = () => {
             Create Link
           </Button>
         </LinkInput>
-        <LinkList links={data?.links} />
+        {/* <LinkList links={data?.links} /> */}
       </Box>
     </Layout.Content>
   );

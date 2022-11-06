@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import '@nomicfoundation/hardhat-toolbox';
 import '@nomiclabs/hardhat-ethers';
 import '@nomiclabs/hardhat-waffle';
@@ -8,11 +7,8 @@ import type { HardhatUserConfig } from 'hardhat/config';
 import { resolve } from 'path';
 
 import './tasks/deploy';
-import './tasks/faucet';
 
 dotenvConfig({ path: resolve(__dirname, '.env') });
-
-const { ALCHEMY_API_KEY, GOERLI_PRIVATE_KEY, ACC_PRIVATE_KEY } = process.env as any;
 
 const CHAIN_IDS = {
   'arbitrum-mainnet': 42161,
@@ -44,18 +40,10 @@ const config: HardhatUserConfig = {
     },
   },
   networks: {
-    goerli: {
-      url: `https://eth-goerli.alchemyapi.io/v2/${ALCHEMY_API_KEY}`,
-      accounts: [GOERLI_PRIVATE_KEY],
-    },
     hardhat: {
-      chainId: CHAIN_IDS.hardhat,
-      accounts: [
-        {
-          privateKey: ACC_PRIVATE_KEY,
-          balance: '10000000000000000000000',
-        },
-      ],
+      forking: {
+        url: 'https://eth-mainnet.alchemyapi.io/v2/37CgCluiS0enLCQHnV1nYZ5tN07m-ZK2',
+      },
     },
   },
   gasReporter: {

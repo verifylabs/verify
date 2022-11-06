@@ -2,7 +2,7 @@
 pragma solidity ^0.8.9;
 
 // Uncomment this line to use console.log
-// import "hardhat/console.sol";
+import "hardhat/console.sol";
 
 contract Verify {
     struct Content {
@@ -12,8 +12,15 @@ contract Verify {
         uint256 timestamp;
     }
 
+    string public OWNER;
+
+    mapping(address => Content[]) public contentsByAddress;
     mapping(string => Content) public contents;
     mapping(string => address[]) public reports;
+
+    constructor(string memory _owner) {
+        OWNER = _owner;
+    }
 
     function createContent(string memory data, string memory id)
         public
@@ -27,6 +34,7 @@ contract Verify {
             block.timestamp
         );
         contents[id] = new_content;
+        contentsByAddress[msg.sender].push(new_content);
         return new_content;
     }
 
@@ -36,9 +44,23 @@ contract Verify {
             reportJustOnce(reports[id], msg.sender),
             "Just one report for address!"
         );
+
         address[] storage last_addresses = reports[id];
         last_addresses.push(msg.sender);
+
         return last_addresses.length;
+    }
+
+    function getContentList(address addr)
+        public
+        view
+        returns (Content[] memory)
+    {
+        return contentsByAddress[addr];
+    }
+
+    function getContent(string memory id) public view returns (Content memory) {
+        return contents[id];
     }
 
     function getReports(string memory id) public view returns (uint256) {

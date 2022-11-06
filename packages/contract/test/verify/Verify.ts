@@ -8,7 +8,7 @@ describe('Verify contract', () => {
   async function deployVerifyFixture() {
     const Verify = await ethers.getContractFactory('Verify');
     const [owner, addr1, addr2] = await ethers.getSigners();
-    const verify = await Verify.deploy();
+    const verify = await Verify.deploy(owner);
     await verify.deployed();
     return { Verify, verify, owner, addr1, addr2 };
   }
@@ -25,7 +25,7 @@ describe('Verify contract', () => {
     return {
       data: decodedData[0],
       id: decodedData[1],
-      address: decodedData[2],
+      owner: decodedData[2],
       timestamp: decodedData[3],
     };
   }

@@ -1,5 +1,6 @@
 import { factories } from "@verify/contract";
-import { useRouter } from "next/router";
+import { ethers } from "ethers";
+import { hexDataSlice } from "ethers/lib/utils";
 import ShortUniqueId from "short-unique-id";
 import { useContract, useSigner } from "wagmi";
 
@@ -10,18 +11,21 @@ type UseCreateLinkParams = {
 };
 
 export function useCreateLink(params: UseCreateLinkParams) {
-  const router = useRouter();
   const { data: signer } = useSigner();
   const contract = useContract({
-    addressOrName: "0xF5aA8e3C6BA1EdF766E197a0bCD5844Fd1ed8A27",
+    addressOrName: "0x90c84237fDdf091b1E63f369AF122EB46000bc70",
     contractInterface: factories.Verify__factory.abi,
-    signerOrProvider: signer,
   });
 
   async function createLink(data: string) {
     const tx = await contract.createContent(data, uuid());
-    const res = await tx.wait();
-    console.log("res", res);
+    await tx.wait();
+    const decodedData = ethers.utils.defaultAbiCoder.decode(
+      ["string", "string", "address", "uint256"],
+      hexDataSlice(tx.data, 4)
+    );
+    console.log("decodedData", decodedData);
+    params.onCompleted?.();
   }
 
   return {
