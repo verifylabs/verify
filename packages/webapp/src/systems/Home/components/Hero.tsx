@@ -27,7 +27,7 @@ export function Hero() {
               color="blue"
               leftIcon="Plus"
               css={{ mr: "-8px" }}
-              onPress={() => router.push(`/create-link?url=${encodeURI(url)}`)}
+              onPress={() => router.push(`/links`)}
               isDisabled={!url.length}
             >
               Create Link

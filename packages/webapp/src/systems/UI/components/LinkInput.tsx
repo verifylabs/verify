@@ -1,7 +1,7 @@
 import type { ThemeUtilsCSS } from "@fuel-ui/css";
-import { darkColors, cssObj, lightColors } from "@fuel-ui/css";
-import { Box, Input } from "@fuel-ui/react";
+import { cssObj, darkColors, lightColors } from "@fuel-ui/css";
 import type { InputProps } from "@fuel-ui/react";
+import { Box, Input } from "@fuel-ui/react";
 import type { ReactNode } from "react";
 import { useAccount } from "wagmi";
 import { ClientSideOnly } from "~/systems/Core";
@@ -29,6 +29,7 @@ export function LinkInput({
       <Input {...props} size="lg">
         <Input.Field
           type="text"
+          autoFocus={true}
           placeholder="Paste url to create your link"
           value={value}
           onChange={(e) => onChange(e.target.value)}

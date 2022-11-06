@@ -1,41 +1,28 @@
 import { cssObj } from "@fuel-ui/css";
-import { Box, Card, Flex, Grid, Heading, Link, Text } from "@fuel-ui/react";
-import type { LinkItemFragment } from "~/generated/graphql";
+import { Card, Copyable, Flex, Grid, Text } from "@fuel-ui/react";
 import { dayjs, truncate } from "~/systems/Core";
 import { verifyUrl } from "~/systems/Core/utils/verifyUrl";
 
 type SelectedLinkProps = {
-  link: LinkItemFragment;
+  link: any;
 };
 export function SelectedLink({ link }: SelectedLinkProps) {
-  const title = link.openGraph?.title;
-  const image = link.openGraph?.image.url;
-  const url = verifyUrl(link.data.short);
+  const url = verifyUrl(link.id);
   return (
     <Card css={styles.root}>
       <Flex as="header" gap="$8">
-        <Box
-          css={{
-            ...styles.image,
-            background: `url(${image}) no-repeat center center`,
-            backgroundSize: "cover",
-          }}
-        />
         <Grid css={styles.info}>
-          <Heading as="h2">{truncate(25, title)}</Heading>
           <Text css={styles.date}>
-            {dayjs(link.createdAt).format("MMM DD, YYYY • hh:mm A")}
+            {dayjs(link.timestamp.toNumber()).format("MMM DD, YYYY • hh:mm A")}
           </Text>
-          <Link href={url} isExternal>
-            {truncate(24, url)}
-          </Link>
+          <Copyable value={url}>{truncate(24, url)}</Copyable>
           <Text
             as="div"
             css={styles.redirect}
             leftIcon="Link"
             leftIconAriaLabel="Destinatino Link"
           >
-            <strong>Destination:</strong> {link.data?.redirect}
+            <strong>Destination:</strong> {link.data}
           </Text>
         </Grid>
       </Flex>

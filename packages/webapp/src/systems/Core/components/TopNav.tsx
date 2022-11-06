@@ -52,12 +52,6 @@ export function TopNav() {
         <li className={addActiveClass("/links")}>
           <Link href="/links">My links</Link>
         </li>
-        <li className={addActiveClass("/guides")}>
-          <Link href="/guides">Guides</Link>
-        </li>
-        <li className={addActiveClass("/link-checker")}>
-          <Link href="/link-checker">Link Checker</Link>
-        </li>
       </Flex>
       <ClientSideOnly>
         <Flex css={styles.buttons} suppressHydrationWarning={true}>
@@ -65,7 +59,7 @@ export function TopNav() {
             <Button
               leftIcon="Plus"
               color="blue"
-              onPress={() => router.push("/create-link")}
+              onPress={() => router.push("/links")}
             >
               Create Link
             </Button>

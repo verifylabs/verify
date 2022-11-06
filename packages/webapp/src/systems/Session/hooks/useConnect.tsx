@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import {
   useAccount,
-  useEnsName,
   useConnect as useConnectWagmi,
   useDisconnect,
 } from "wagmi";
@@ -28,9 +27,7 @@ export function useConnect() {
   const [signOut, { loading: signOutLoading }] = useSignOutMutation({
     refetchQueries: REFETCH_QUERIES,
   });
-
   const { address, isConnected } = useAccount();
-  const { data: ensName } = useEnsName({ address });
 
   const { connect } = useConnectWagmi({
     connector: new InjectedConnector(),
@@ -67,7 +64,7 @@ export function useConnect() {
     connect,
     disconnect,
     isConnected,
-    ensName,
+    ensName: "",
     address,
     loading: signInLoading || signOutLoading,
   };

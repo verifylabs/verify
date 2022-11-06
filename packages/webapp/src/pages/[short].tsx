@@ -1,7 +1,14 @@
 import { cssObj } from "@fuel-ui/css";
-import { Box, Button, Card, Flex, Icon, Link, Text } from "@fuel-ui/react";
+import { Box, Button, Card, Flex, Icon, Text } from "@fuel-ui/react";
+import { factories } from "@verify/contract";
+import { BigNumber } from "ethers";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import { useAccount, useContractRead } from "wagmi";
 import { Layout } from "~/systems/Core";
 import { GeneratedImage } from "~/systems/Core/components/GeneratedImage";
+import { useReportLink } from "~/systems/CreateLink/hooks";
+import { useConnect } from "~/systems/Session";
 
 const styles = {
   layout: cssObj({
@@ -69,7 +76,66 @@ const styles = {
   }),
 };
 
+function useCountDown(enable: boolean, final: () => void) {
+  const [count, setCount] = useState(20);
+
+  useEffect(() => {
+    if (!enable) return;
+    if (count <= 0) {
+      final();
+      return;
+    }
+    const timer = setTimeout(() => {
+      setCount(count - 1);
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, [count, enable]);
+
+  return count;
+}
+
 export default function LinkPreview() {
+  const { address } = useAccount();
+  const { connect } = useConnect();
+  const router = useRouter();
+  const { short } = router.query as { short: string };
+  const { data: contentData } = useContractRead({
+    addressOrName: process.env.NEXT_PUBLIC_CONTRACT_ID!,
+    contractInterface: factories.Verify__factory.abi,
+    functionName: "contents",
+    enabled: !!short,
+    args: [short],
+  });
+  const { data: resportData, refetch } = useContractRead({
+    addressOrName: process.env.NEXT_PUBLIC_CONTRACT_ID!,
+    contractInterface: factories.Verify__factory.abi,
+    functionName: "getReports",
+    enabled: !!short,
+    args: [short],
+  });
+  const content: any = contentData;
+  const resports: BigNumber = resportData as any;
+  const { reportLink, loading: reporting } = useReportLink({
+    onCompleted: () => refetch(),
+  });
+  const hasReports = resports?.toNumber() === 0;
+  const countDown = useCountDown(
+    !!content && hasReports,
+    () => (window.location.href = content.data)
+  );
+
+  if (!content) return null;
+
+  if (!address) {
+    return (
+      <Layout.Content css={styles.layout}>
+        <Card css={styles.root}>
+          <Button onPress={() => connect()}>Connect your wallet</Button>
+        </Card>
+      </Layout.Content>
+    );
+  }
+
   return (
     <Layout.Content css={styles.layout}>
       <Card css={styles.root}>
@@ -80,7 +146,7 @@ export default function LinkPreview() {
                 Creator
               </Text>
             </Box>
-            <GeneratedImage size="100%" value="Hello World" />
+            <GeneratedImage size="100%" value={content.owner} />
           </Box>
           <Box css={styles.linkIcon}>
             <Icon icon={Icon.is("Link")} size={26} />
@@ -91,69 +157,82 @@ export default function LinkPreview() {
                 My verify
               </Text>
             </Box>
-            <GeneratedImage size="100%" value="Hello World" />
+            <GeneratedImage size="100%" value={address} />
           </Box>
         </Flex>
         <Flex css={styles.report} direction="row" align="center">
-          {/* <Text fontSize="sm" color="gray12" as="h2">
-            No reports on this link
-          </Text>
-          <Flex css={{ flex: 1 }} justify="end">
-            <Icon
-              icon={Icon.is("ShieldCheck")}
-              size={36}
-              color="blue10"
-              css={{ paddingLeft: "$2" }}
-            />
-          </Flex> */}
-          <Text
-            fontSize="sm"
-            as="h2"
-            css={{
-              color: "$red10 !important",
-            }}
-          >
-            2 reports for this link
-          </Text>
-          <Flex css={{ flex: 1 }} justify="end">
-            <Icon
-              icon={Icon.is("ShieldWarning")}
-              size={36}
-              color="red10"
-              css={{ paddingLeft: "$2" }}
-            />
-          </Flex>
+          {resports?.toNumber() > 0 ? (
+            <>
+              <Text
+                fontSize="sm"
+                as="h2"
+                css={{
+                  color: "$red10 !important",
+                }}
+              >
+                {resports.toNumber()} reports for this link
+              </Text>
+              <Flex css={{ flex: 1 }} justify="end">
+                <Icon
+                  icon={Icon.is("ShieldWarning")}
+                  size={36}
+                  color="red10"
+                  css={{ paddingLeft: "$2" }}
+                />
+              </Flex>
+            </>
+          ) : (
+            <>
+              <Text fontSize="sm" color="gray12" as="h2">
+                No reports on this link
+              </Text>
+              <Flex css={{ flex: 1 }} justify="end">
+                <Icon
+                  icon={Icon.is("ShieldCheck")}
+                  size={36}
+                  color="blue10"
+                  css={{ paddingLeft: "$2" }}
+                />
+              </Flex>
+            </>
+          )}
         </Flex>
         <Flex css={styles.description} direction="column">
-          <Text as="h2">Link owner</Text>
-          <Text fontSize="sm" color="gray12">
-            0x1fc982dcecf486bf8106029e04cd3033e895ff48
+          <Text as="h2">Creator info</Text>
+          <Text css={{ fontSize: 12 }} color="gray12">
+            {content.owner}
           </Text>
-          <Text fontSize="sm" color="gray12">
-            stacio.eth
-          </Text>
-          <Link
-            css={{ fontSize: "$sm" }}
-            target="_blank"
-            href="https://etherscan.io/address/0xdc5a28885a1800b1435982954ee9b51d2a8d3bf0"
-          >
-            See transaction
-          </Link>
         </Flex>
         <Flex css={styles.description} direction="column">
           <Text as="h2">Your info</Text>
-          <Text fontSize="sm" color="gray12">
-            address: 0x1fc982dcecf486bf8106029e04cd3033e895ff48
+          <Text css={{ fontSize: 12 }} color="gray12">
+            {address}
           </Text>
-          <Text fontSize="sm" color="gray12">
-            ens: stacio.eth
+        </Flex>
+        <Flex css={styles.description} direction="column">
+          <Text as="h2">Redirecting to</Text>
+          <Text css={{ fontSize: 14 }} color="gray12">
+            {content.data}
           </Text>
         </Flex>
         <Card.Footer css={{ padding: "$2", display: "flex" }}>
-          <Button color="gray" css={{ flex: 1, marginRight: "$1" }}>
+          <Button
+            color="gray"
+            css={{ flex: 1, marginRight: "$1" }}
+            isLoading={reporting}
+            isDisabled={reporting}
+            onPress={() => reportLink(short)}
+          >
             REPORT
           </Button>
-          <Button css={{ flex: 1, marginLeft: "$1" }}>GO (20s)</Button>
+          <Button
+            css={{ flex: 1, marginLeft: "$1" }}
+            onPress={() => {
+              window.location.href = content.data;
+            }}
+          >
+            GO {!hasReports ? "" : `(${countDown}s)`}
+          </Button>
         </Card.Footer>
       </Card>
     </Layout.Content>

@@ -7,9 +7,10 @@ import { LinkItem } from "./LinkItem";
 
 type LinkListProps = {
   links?: LinkItemFragment[];
+  onSelect: (id: string) => void;
 };
 
-export function LinkList({ links }: LinkListProps) {
+export function LinkList({ links, onSelect }: LinkListProps) {
   const header = (
     <Card.Header as="header" css={styles.header}>
       <Heading as="h2">My Links</Heading>
@@ -37,7 +38,7 @@ export function LinkList({ links }: LinkListProps) {
         <Focus.ArrowNavigator asChild>
           <Stack gap="$1" direction="column">
             {(links || []).slice(0, 3).map((link) => (
-              <LinkItem key={link.id} link={link} />
+              <LinkItem onSelect={onSelect} key={link.id} link={link} />
             ))}
           </Stack>
         </Focus.ArrowNavigator>

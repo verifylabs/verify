@@ -8,9 +8,10 @@ import { verifyUrl } from "~/systems/Core/utils/verifyUrl";
 
 type SimpleLinkItemProps = {
   link: LinkItemFragment;
+  onSelect: (id: string) => void;
 };
 
-export function LinkItem({ link }: SimpleLinkItemProps) {
+export function LinkItem({ link, onSelect }: SimpleLinkItemProps) {
   const title = link.openGraph?.title;
   const url = verifyUrl(link.data.short);
   const router = useRouter();
@@ -18,7 +19,7 @@ export function LinkItem({ link }: SimpleLinkItemProps) {
 
   const { pressProps } = usePress({
     onPress: () => {
-      router.push(`/links?selected=${link.id}`);
+      onSelect(link.id);
     },
   });
 

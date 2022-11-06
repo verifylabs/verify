@@ -1,15 +1,32 @@
-import { configureChains, createClient, defaultChains } from 'wagmi';
+import { configureChains, createClient } from 'wagmi';
 import { InjectedConnector } from 'wagmi/connectors/injected';
 import { MetaMaskConnector } from 'wagmi/connectors/metaMask';
-import { alchemyProvider } from 'wagmi/providers/alchemy';
-import { publicProvider } from 'wagmi/providers/public';
+import { jsonRpcProvider } from 'wagmi/providers/jsonRpc';
 
-const apiKey = '37CgCluiS0enLCQHnV1nYZ5tN07m-ZK2';
-
-const { chains, provider, webSocketProvider } = configureChains(defaultChains, [
-  publicProvider(),
-  alchemyProvider({ apiKey }),
-]);
+const { chains, provider, webSocketProvider } = configureChains(
+  [
+    {
+      id: 256236330,
+      name: 'SKALE ETH-SF Vega',
+      network: 'https://eth-sf.skalenodes.com/v1/hackathon-content-live-vega',
+      rpcUrls: {
+        default: 'https://eth-sf.skalenodes.com/v1/hackathon-content-live-vega',
+      },
+      nativeCurrency: {
+        name: 'sFUEL',
+        symbol: 'sFUEL',
+        decimals: 18,
+      },
+    },
+  ],
+  [
+    jsonRpcProvider({
+      rpc: (chain) => ({
+        http: 'https://eth-sf.skalenodes.com/v1/hackathon-content-live-vega',
+      }),
+    }),
+  ]
+);
 
 // Set up client
 export const wagmiClient = createClient({

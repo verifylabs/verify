@@ -1,8 +1,5 @@
 // SPDX-License-Identifier: UNLICENSED
-pragma solidity ^0.8.9;
-
-// Uncomment this line to use console.log
-import "hardhat/console.sol";
+pragma solidity ^0.8.0;
 
 contract Verify {
     struct Content {
@@ -50,12 +47,12 @@ contract Verify {
         return last_addresses.length;
     }
 
-    function getContentList(address owner)
+    function getContentList(address addr)
         public
         view
         returns (Content[] memory)
     {
-        return contentsByAddress[owner];
+        return contentsByAddress[addr];
     }
 
     function getContent(string memory id) public view returns (Content memory) {
