@@ -1,14 +1,14 @@
 import { cssObj } from "@fuel-ui/css";
 import { Box, Button, Card, Flex, Icon, Link, Text } from "@fuel-ui/react";
-import { useRouter } from "next/router";
 import { Layout } from "~/systems/Core";
 import { GeneratedImage } from "~/systems/Core/components/GeneratedImage";
 
-type RedirectPageQuery = {
-  short?: string;
-};
-
 const styles = {
+  layout: cssObj({
+    display: "flex",
+    height: "100vh",
+    padding: 0,
+  }),
   description: cssObj({
     padding: "$2",
   }),
@@ -49,10 +49,8 @@ const styles = {
     paddingBottom: "$2",
   }),
   root: cssObj({
+    alignSelf: "center",
     margin: "0 auto",
-    maxW: "360px",
-    width: "360px",
-
     "header, footer": {
       py: "$3",
     },
@@ -61,25 +59,19 @@ const styles = {
       fontSize: "$xl",
       color: "$gray12",
     },
-    label: {
-      position: "relative",
+    "@media only screen and (max-width: 600px)": {
+      width: "90vw",
     },
-    "label button": {
-      position: "absolute",
-      top: 0,
-      right: 0,
+    "@media only screen and (min-width: 600px)": {
+      maxW: "360px",
+      width: "360px",
     },
   }),
 };
 
 export default function LinkPreview() {
-  const router = useRouter();
-  const { short } = router.query as RedirectPageQuery;
-
-  if (!short) return null;
-
   return (
-    <Layout.Content>
+    <Layout.Content css={styles.layout}>
       <Card css={styles.root}>
         <Flex css={styles.images}>
           <Box css={styles.image}>

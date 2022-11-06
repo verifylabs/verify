@@ -57,8 +57,10 @@ const styles = {
     flexDirection: "column",
   }),
   content: cssObj({
-    py: "$20",
-    px: "$24",
+    "@media only screen and (min-width: 600px)": {
+      py: "$20",
+      px: "$24",
+    },
     flex: 1,
   }),
 };
