@@ -1,7 +1,15 @@
 {
-  "name": "hardhat-boilerplate",
+  "name": "@verify/contract",
   "version": "1.0.0",
-  "description": "A boilerplate repository to get you started with Hardhat and Ethereum development",
+  "description": "Verify solidity contract",
+  "license": "Appache-2.0",
+  "main": "./types/index.ts",
+  "exports": {
+    "./abi.json": {
+      "require": "./artifacts/contracts/Verify.sol/Verify.json",
+      "default": "./artifacts/contracts/Verify.sol/Verify.json"
+    }
+  },
   "scripts": {
     "hardhat:compile": "hardhat compile",
     "hardhat:deploy": "hardhat deploy:Verify",
