@@ -7,6 +7,7 @@
     "hardhat:deploy": "hardhat deploy:Verify",
     "hardhat:test": "hardhat test",
     "hardhat:node": "hardhat node",
+    "hardhat:faucet": "hardhat faucet",
     "typechain": "TS_NODE_TRANSPILE_ONLY=true hardhat typechain"
   },
   "devDependencies": {
