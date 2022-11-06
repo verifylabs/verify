@@ -14,8 +14,8 @@
   },
   "dependencies": {
     "@apollo/client": "^3.6.9",
-    "@fuel-ui/css": "0.9.0",
-    "@fuel-ui/react": "0.9.0",
+    "@fuel-ui/css": "workspace:*",
+    "@fuel-ui/react": "workspace:*",
     "@radix-ui/colors": "^0.1.8",
     "apollo-server-core": "^3.10.0",
     "apollo-server-micro": "^3.10.0",
@@ -30,6 +30,7 @@
     "graphql-iso-date": "^3.6.1",
     "graphql-scalars": "^1.17.0",
     "html-metadata": "^1.7.1",
+    "jdenticon": "^3.2.0",
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.21",
     "memory-cache": "^0.2.0",
@@ -45,7 +46,6 @@
     "wagmi": "^0.6.0"
   },
   "devDependencies": {
-    "@fuel-ui/config": "0.9.0",
     "@graphql-codegen/cli": "^2.11.3",
     "@graphql-codegen/import-types-preset": "^2.2.2",
     "@graphql-codegen/named-operations-object": "^2.3.0",
