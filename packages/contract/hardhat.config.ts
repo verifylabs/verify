@@ -12,7 +12,7 @@ import './tasks/faucet';
 
 dotenvConfig({ path: resolve(__dirname, '.env') });
 
-const { ALCHEMY_API_KEY, GOERLI_PRIVATE_KEY, MNEMONIC } = process.env as any;
+const { ALCHEMY_API_KEY, GOERLI_PRIVATE_KEY, ACC_PRIVATE_KEY } = process.env as any;
 
 const CHAIN_IDS = {
   'arbitrum-mainnet': 42161,
@@ -49,8 +49,13 @@ const config: HardhatUserConfig = {
       accounts: [GOERLI_PRIVATE_KEY],
     },
     hardhat: {
-      accounts: { mnemonic: MNEMONIC },
       chainId: CHAIN_IDS.hardhat,
+      accounts: [
+        {
+          privateKey: ACC_PRIVATE_KEY,
+          balance: '10000000000000000000000',
+        },
+      ],
     },
   },
   gasReporter: {
