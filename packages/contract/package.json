@@ -1,16 +1,23 @@
 {
   "name": "@verify/contract",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "Verify solidity contract",
   "license": "Appache-2.0",
-  "main": "./types/index.ts",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "typings": "dist/index.d.ts",
   "exports": {
-    "./abi.json": {
-      "require": "./artifacts/contracts/Verify.sol/Verify.json",
-      "default": "./artifacts/contracts/Verify.sol/Verify.json"
+    ".": {
+      "require": "./dist/index.js",
+      "default": "./dist/index.mjs"
     }
   },
+  "files": [
+    "dist"
+  ],
   "scripts": {
+    "build": "tsup --dts",
     "hardhat:compile": "hardhat compile",
     "hardhat:deploy": "hardhat deploy:Verify",
     "hardhat:test": "hardhat test",
@@ -44,6 +51,7 @@
     "ts-generator": "^0.1.1",
     "ts-node": "^10.9.1",
     "typechain": "^8.1.1",
-    "typescript": "^4.8.4"
+    "typescript": "^4.8.4",
+    "tsup": "^6.3.0"
   }
 }

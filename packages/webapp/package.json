@@ -17,6 +17,7 @@
     "@fuel-ui/css": "workspace:*",
     "@fuel-ui/react": "workspace:*",
     "@radix-ui/colors": "^0.1.8",
+    "@verify/contract": "workspace:*",
     "apollo-server-core": "^3.10.0",
     "apollo-server-micro": "^3.10.0",
     "axios": "^0.27.2",
@@ -42,6 +43,7 @@
     "react": "^18.2.0",
     "react-aria": "^3.18.0",
     "react-dom": "^18.2.0",
+    "short-unique-id": "^4.4.4",
     "url-join-ts": "^1.0.5",
     "wagmi": "^0.6.0"
   },

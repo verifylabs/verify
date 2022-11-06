@@ -1,7 +1,7 @@
-import { createClient, configureChains, chain } from 'wagmi';
+import { chain, configureChains, createClient } from 'wagmi';
 import { publicProvider } from 'wagmi/providers/public';
 
-const { provider, webSocketProvider } = configureChains([chain.mainnet], [publicProvider()]);
+const { provider, webSocketProvider } = configureChains([chain.localhost], [publicProvider()]);
 
 export const wagmiClient = createClient({
   autoConnect: true,

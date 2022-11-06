@@ -1,7 +1,9 @@
-import { toast } from "@fuel-ui/react";
+import { factories } from "@verify/contract";
 import { useRouter } from "next/router";
-import { useCreateLinkMutation, gqlOperations } from "~/generated/graphql";
-import { useSign } from "~/systems/Core";
+import ShortUniqueId from "short-unique-id";
+import { useContract } from "wagmi";
+
+const uuid = new ShortUniqueId();
 
 type UseCreateLinkParams = {
   onCompleted?: () => void;
@@ -9,34 +11,18 @@ type UseCreateLinkParams = {
 
 export function useCreateLink(params: UseCreateLinkParams) {
   const router = useRouter();
-  const [createLink, { loading }] = useCreateLinkMutation({
-    refetchQueries: [gqlOperations.Query.Links],
-    onCompleted: () => {
-      params.onCompleted?.();
-      router.push("/create-link");
-      toast.success("Link created successfully!", {
-        position: "bottom-right",
-      });
-    },
+  const contract = useContract({
+    addressOrName: "0xF5aA8e3C6BA1EdF766E197a0bCD5844Fd1ed8A27",
+    contractInterface: factories.Verify__factory.abi,
   });
 
-  const { sign } = useSign({
-    onSuccess: async (data) => {
-      if (data) {
-        await createLink({
-          variables: {
-            input: {
-              data: JSON.parse(data.message),
-              signature: data.signature,
-            },
-          },
-        });
-      }
-    },
-  });
+  async function createLink(data: string) {
+    // const tx = await contract.createContent(data, uuid());
+    // console.log("tx", tx);
+  }
 
   return {
-    loading,
-    createLink: sign,
+    loading: false,
+    createLink,
   };
 }

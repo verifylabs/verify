@@ -334,6 +334,7 @@ importers:
       solidity-coverage: ^0.8.2
       ts-generator: ^0.1.1
       ts-node: ^10.9.1
+      tsup: ^6.3.0
       typechain: ^8.1.1
       typescript: ^4.8.4
     devDependencies:
@@ -361,6 +362,7 @@ importers:
       solidity-coverage: 0.8.2_hardhat@2.12.2
       ts-generator: 0.1.1
       ts-node: 10.9.1_cbe7ovvae6zqfnmtgctpgpys54
+      tsup: 6.4.0_mwhvu7sfp6vq5ryuwb6hlbjfka
       typechain: 8.1.1_typescript@4.8.4
       typescript: 4.8.4
 
@@ -387,6 +389,7 @@ importers:
       '@types/node': ^18.6.3
       '@types/react': ^18.0.15
       '@types/react-dom': ^18.0.6
+      '@verify/contract': workspace:*
       apollo-server-core: ^3.10.0
       apollo-server-micro: ^3.10.0
       axios: ^0.27.2
@@ -416,6 +419,7 @@ importers:
       react: ^18.2.0
       react-aria: ^3.18.0
       react-dom: ^18.2.0
+      short-unique-id: ^4.4.4
       ts-jest: ^28.0.7
       typescript: ^4.7.4
       url-join-ts: ^1.0.5
@@ -425,6 +429,7 @@ importers:
       '@fuel-ui/css': link:../../design-system/css
       '@fuel-ui/react': link:../../design-system/react
       '@radix-ui/colors': 0.1.8
+      '@verify/contract': link:../contract
       apollo-server-core: 3.10.0_graphql@16.5.0
       apollo-server-micro: 3.10.0_graphql@16.5.0+micro@9.4.1
       axios: 0.27.2
@@ -450,6 +455,7 @@ importers:
       react: 18.2.0
       react-aria: 3.18.0_biqbaboplfbrettd7655fr4n2y
       react-dom: 18.2.0_react@18.2.0
+      short-unique-id: 4.4.4
       url-join-ts: 1.0.5
       wagmi: 0.6.0_um4cugg2i3ywhvigsmvsir7hgy
     devDependencies:
@@ -16776,19 +16782,6 @@ packages:
     peerDependenciesMeta:
       debug:
         optional: true
-    dev: false
-
-  /follow-redirects/1.15.1_debug@4.3.4:
-    resolution: {integrity: sha512-yLAMQs+k0b2m7cVxpS1VKJVvoz7SS9Td1zss3XRwXj+ZDH00RJgnuLx7E44wx02kQLrdM3aOOy+FpzS7+8OizA==}
-    engines: {node: '>=4.0'}
-    peerDependencies:
-      debug: '*'
-    peerDependenciesMeta:
-      debug:
-        optional: true
-    dependencies:
-      debug: 4.3.4
-    dev: true
 
   /for-each/0.3.3:
     resolution: {integrity: sha512-jqYfLp7mo9vIyQf8ykW2v7A+2N4QjeCeI5+Dz9XraiO1ign81wjiH7Fb9vSOWvQfNtmSa4H2RoQTrrXivdUZmw==}
@@ -22246,6 +22239,23 @@ packages:
       yaml: 1.10.2
     dev: true
 
+  /postcss-load-config/3.1.4_ts-node@10.9.1:
+    resolution: {integrity: sha512-6DiM4E7v4coTE4uzA8U//WhtPwyhiim3eyjEMFCnUpzbrkK9wJHgKDT2mR+HbtSrd/NubVaYTOpSpjUl8NQeRg==}
+    engines: {node: '>= 10'}
+    peerDependencies:
+      postcss: '>=8.0.9'
+      ts-node: '>=9.0.0'
+    peerDependenciesMeta:
+      postcss:
+        optional: true
+      ts-node:
+        optional: true
+    dependencies:
+      lilconfig: 2.0.5
+      ts-node: 10.9.1_cbe7ovvae6zqfnmtgctpgpys54
+      yaml: 1.10.2
+    dev: true
+
   /postcss-loader/4.3.0_gzaxsinx64nntyd3vmdqwl7coe:
     resolution: {integrity: sha512-M/dSoIiNDOo8Rk0mUqoj4kpGq91gcxCfb9PoyZVdZ76/AuhxylHDYZblNE8o+EQ9AMSASeMFEKxZf5aU6wlx1Q==}
     engines: {node: '>= 10.13.0'}
@@ -24078,6 +24088,11 @@ packages:
       rechoir: 0.6.2
     dev: true
 
+  /short-unique-id/4.4.4:
+    resolution: {integrity: sha512-oLF1NCmtbiTWl2SqdXZQbo5KM1b7axdp0RgQLq8qCBBLoq+o3A5wmLrNM6bZIh54/a8BJ3l69kTXuxwZ+XCYuw==}
+    hasBin: true
+    dev: false
+
   /side-channel/1.0.4:
     resolution: {integrity: sha512-q5XPytqFEIKHkGdiMIrY10mvLRvnQh42/+GoBlFW3b2LXLE2xxJpZFdm94we0BaoV3RwJyGqg5wS7epxTv0Zvw==}
     dependencies:
@@ -24193,7 +24208,7 @@ packages:
     dependencies:
       command-exists: 1.2.9
       commander: 3.0.2
-      follow-redirects: 1.15.1_debug@4.3.4
+      follow-redirects: 1.15.1
       fs-extra: 0.30.0
       js-sha3: 0.8.0
       memorystream: 0.3.1
@@ -25464,6 +25479,42 @@ packages:
 
   /tsort/0.0.1:
     resolution: {integrity: sha512-Tyrf5mxF8Ofs1tNoxA13lFeZ2Zrbd6cKbuH3V+MQ5sb6DtBj5FjrXVsRWT8YvNAQTqNoz66dz1WsbigI22aEnw==}
+    dev: true
+
+  /tsup/6.4.0_mwhvu7sfp6vq5ryuwb6hlbjfka:
+    resolution: {integrity: sha512-4OlbqIK/SF+cJp0mMqPM2pKULvgj/1S2Gm3I1aFoFGIryUOyIqPZBoqKkqVQT6uFtWJ5AHftIv0riXKfHox1zQ==}
+    engines: {node: '>=14'}
+    hasBin: true
+    peerDependencies:
+      '@swc/core': ^1
+      postcss: ^8.4.12
+      typescript: ^4.1.0
+    peerDependenciesMeta:
+      '@swc/core':
+        optional: true
+      postcss:
+        optional: true
+      typescript:
+        optional: true
+    dependencies:
+      bundle-require: 3.1.2_esbuild@0.15.13
+      cac: 6.7.14
+      chokidar: 3.5.3
+      debug: 4.3.4
+      esbuild: 0.15.13
+      execa: 5.1.1
+      globby: 11.1.0
+      joycon: 3.1.1
+      postcss-load-config: 3.1.4_ts-node@10.9.1
+      resolve-from: 5.0.0
+      rollup: 3.2.5
+      source-map: 0.8.0-beta.0
+      sucrase: 3.28.0
+      tree-kill: 1.2.2
+      typescript: 4.8.4
+    transitivePeerDependencies:
+      - supports-color
+      - ts-node
     dev: true
 
   /tsup/6.4.0_typescript@4.8.4:
