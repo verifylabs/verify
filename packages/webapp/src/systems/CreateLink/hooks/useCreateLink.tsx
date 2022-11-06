@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { factories } from "@verify/contract";
 import { ethers } from "ethers";
 import { hexDataSlice } from "ethers/lib/utils";

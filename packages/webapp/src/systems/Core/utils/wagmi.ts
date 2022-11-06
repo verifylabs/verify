@@ -21,7 +21,7 @@ const { chains, provider, webSocketProvider } = configureChains(
   ],
   [
     jsonRpcProvider({
-      rpc: (chain) => ({
+      rpc: () => ({
         http: 'https://eth-sf.skalenodes.com/v1/hackathon-content-live-vega',
       }),
     }),

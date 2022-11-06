@@ -1,13 +1,16 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { cssObj } from "@fuel-ui/css";
 import { Box, Button, Heading } from "@fuel-ui/react";
 import { factories } from "@verify/contract";
+import type { GetServerSidePropsContext } from "next";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useAccount, useContractRead } from "wagmi";
 import { Layout } from "~/systems/Core";
 import { useCreateLink } from "~/systems/CreateLink/hooks";
 import { LinkList, SelectedLink } from "~/systems/Links";
+import { withSessionProps } from "~/systems/Session";
 import { LinkInput } from "~/systems/UI";
 
 const Links = () => {
@@ -99,5 +102,13 @@ const styles = {
     width: "100%",
   }),
 };
+
+Links.getPageLayout = Layout.getLayout({
+  title: "Links",
+});
+
+export async function getServerSideProps(ctx: GetServerSidePropsContext) {
+  return withSessionProps(ctx);
+}
 
 export default Links;

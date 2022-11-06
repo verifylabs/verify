@@ -1,6 +1,5 @@
 import { getCssText } from "@fuel-ui/css";
-import NextDocument, { Html, Head, Main, NextScript } from "next/document";
-import React from "react";
+import NextDocument, { Head, Html, Main, NextScript } from "next/document";
 
 export default class Document extends NextDocument {
   render() {

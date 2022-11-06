@@ -1,14 +1,19 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable consistent-return */
+/* eslint-disable no-return-assign */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { cssObj } from "@fuel-ui/css";
 import { Box, Button, Card, Flex, Icon, Text } from "@fuel-ui/react";
 import { factories } from "@verify/contract";
-import { BigNumber } from "ethers";
+import type { BigNumber } from "ethers";
+import type { GetServerSidePropsContext } from "next";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useAccount, useContractRead } from "wagmi";
 import { Layout } from "~/systems/Core";
 import { GeneratedImage } from "~/systems/Core/components/GeneratedImage";
 import { useReportLink } from "~/systems/CreateLink/hooks";
-import { useConnect } from "~/systems/Session";
+import { useConnect, withSessionProps } from "~/systems/Session";
 
 const styles = {
   layout: cssObj({
@@ -94,7 +99,7 @@ function useCountDown(enable: boolean, final: () => void) {
   return count;
 }
 
-export default function LinkPreview() {
+function LinkPreview() {
   const { address } = useAccount();
   const { connect } = useConnect();
   const router = useRouter();
@@ -238,3 +243,13 @@ export default function LinkPreview() {
     </Layout.Content>
   );
 }
+
+LinkPreview.getPageLayout = Layout.getLayout({
+  title: "LinkPreview",
+});
+
+export async function getServerSideProps(ctx: GetServerSidePropsContext) {
+  return withSessionProps(ctx);
+}
+
+export default LinkPreview;

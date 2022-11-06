@@ -35,7 +35,7 @@ export function LinkList({ links, onSelect }: LinkListProps) {
     <Card css={styles.root}>
       {header}
       <Card.Body>
-        <Focus.ArrowNavigator asChild>
+        <Focus.ArrowNavigator>
           <Stack gap="$1" direction="column">
             {(links || []).slice(0, 3).map((link) => (
               <LinkItem onSelect={onSelect} key={link.id} link={link} />

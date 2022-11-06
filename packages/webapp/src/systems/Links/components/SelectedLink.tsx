@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { cssObj } from "@fuel-ui/css";
 import { Card, Copyable, Flex, Grid, Text } from "@fuel-ui/react";
 import { dayjs, truncate } from "~/systems/Core";

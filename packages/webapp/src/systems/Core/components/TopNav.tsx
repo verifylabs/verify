@@ -74,26 +74,25 @@ export function TopNav() {
               side="bottom"
               align="end"
               css={styles.userDropdown}
-              contentProps={{
-                sideOffset: 5,
-              }}
+              sideOffset={5}
               content={
-                <Menu aria-label="Actions" css={styles.userMenu}>
-                  <Menu.Item
-                    key="profile"
-                    textValue="My Profile"
-                    css={styles.userMenuItem}
-                    onPress={handleGoToProfile}
-                  >
+                <Menu
+                  aria-label="Actions"
+                  css={styles.userMenu}
+                  onAction={(action) => {
+                    if (action === "profile") {
+                      handleGoToProfile();
+                    }
+                    if (action === "settings") {
+                      handleDisconnect();
+                    }
+                  }}
+                >
+                  <Menu.Item key="profile" textValue="My Profile">
                     <Icon icon="User" css={{ color: "$gray8" }} />
                     My Profile
                   </Menu.Item>
-                  <Menu.Item
-                    key="settings"
-                    textValue="Settings"
-                    css={styles.userMenuItem}
-                    onPress={handleDisconnect}
-                  >
+                  <Menu.Item key="settings" textValue="Settings">
                     <Icon icon="SignOut" css={{ color: "$gray8" }} />
                     Sign Out
                   </Menu.Item>

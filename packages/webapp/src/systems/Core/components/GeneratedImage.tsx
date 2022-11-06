@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import * as jdenticon from "jdenticon";
 import { useEffect, useRef } from "react";
 
