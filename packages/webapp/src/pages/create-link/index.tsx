@@ -1,10 +1,11 @@
+/* eslint-disable no-inner-declarations */
 import { cssObj } from "@fuel-ui/css";
 import { Box, Heading } from "@fuel-ui/react";
 import { factories } from "@verify/contract";
 import type { GetServerSidePropsContext } from "next";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { useContractRead } from "wagmi";
+import { useContract, useSigner } from "wagmi";
 import type { LinksQuery } from "~/generated/graphql";
 import { LinksDocument } from "~/generated/graphql";
 import { initApollo, Layout } from "~/systems/Core";
@@ -15,10 +16,11 @@ import { Button, LinkInput } from "~/systems/UI";
 const CreateLink = () => {
   // const { data } = useLinksQuery({ variables: { address: address as any } });
   // const [links, setLinks] = useState([]);
-  const contract = useContractRead({
+  const { data: signer } = useSigner();
+  const contract = useContract({
     addressOrName: "0x90c84237fDdf091b1E63f369AF122EB46000bc70",
     contractInterface: factories.Verify__factory.abi,
-    functionName: "getContentList",
+    signerOrProvider: signer,
   });
 
   const router = useRouter();
@@ -34,11 +36,14 @@ const CreateLink = () => {
   }
 
   useEffect(() => {
-    // console.log("address", address);
-    // contract.callStatic.getContentList(address).then((res: any) => {
-    //   console.log("res", res);
-    // });
-  }, []);
+    if (contract.provider) {
+      async function callA() {
+        const res = await contract.getContents();
+        console.log("res", res);
+      }
+      callA();
+    }
+  }, [contract]);
 
   return (
     <Layout.Content css={styles.wrapper}>

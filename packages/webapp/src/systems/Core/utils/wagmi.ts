@@ -6,9 +6,9 @@ import { publicProvider } from 'wagmi/providers/public';
 
 const apiKey = '37CgCluiS0enLCQHnV1nYZ5tN07m-ZK2';
 
-const { chains, provider } = configureChains(defaultChains, [
-  alchemyProvider({ apiKey }),
+const { chains, provider, webSocketProvider } = configureChains(defaultChains, [
   publicProvider(),
+  alchemyProvider({ apiKey }),
 ]);
 
 // Set up client
@@ -25,4 +25,5 @@ export const wagmiClient = createClient({
     }),
   ],
   provider,
+  webSocketProvider,
 });

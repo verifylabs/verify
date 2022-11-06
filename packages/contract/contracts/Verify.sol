@@ -50,12 +50,12 @@ contract Verify {
         return last_addresses.length;
     }
 
-    function getContentList(address addr)
+    function getContentList(address owner)
         public
         view
         returns (Content[] memory)
     {
-        return contentsByAddress[addr];
+        return contentsByAddress[owner];
     }
 
     function getContent(string memory id) public view returns (Content memory) {

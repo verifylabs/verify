@@ -43,7 +43,7 @@ describe('Verify contract', () => {
       const content = await createContent(verify);
       const res1 = await verify.getReports(content.id);
       expect(res1.toString()).to.equal('0');
-      const tx = await verify.createReport(content.id);
+      const tx = await verify.createReport(content.id, content.owner);
       await tx.wait();
       const res2 = await verify.getReports(content.id);
       expect(res2.toString()).to.equal('1');

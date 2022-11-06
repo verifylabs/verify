@@ -10,21 +10,9 @@ import './tasks/deploy';
 
 dotenvConfig({ path: resolve(__dirname, '.env') });
 
-const CHAIN_IDS = {
-  'arbitrum-mainnet': 42161,
-  avalanche: 43114,
-  bsc: 56,
-  hardhat: 31337,
-  mainnet: 1,
-  'optimism-mainnet': 10,
-  'polygon-mainnet': 137,
-  'polygon-mumbai': 80001,
-  sepolia: 11155111,
-};
-
 const config: HardhatUserConfig = {
   solidity: {
-    version: '0.8.9',
+    version: '0.8.17',
     settings: {
       metadata: {
         // Not including the metadata hash
@@ -42,7 +30,7 @@ const config: HardhatUserConfig = {
   networks: {
     hardhat: {
       forking: {
-        url: 'https://eth-mainnet.alchemyapi.io/v2/37CgCluiS0enLCQHnV1nYZ5tN07m-ZK2',
+        url: 'https://eth-mainnet.g.alchemy.com/v2/37CgCluiS0enLCQHnV1nYZ5tN07m-ZK2',
       },
     },
   },
