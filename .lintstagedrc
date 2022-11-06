@@ -1,0 +1,10 @@
+{
+  "./packages/api/*.{js,jsx,ts,tsx,html}": [
+    "pnpm prettier:check",
+    "pnpm -r --filter='@verify/api' exec eslint"
+  ],
+  "./packages/webapp/*.{js,jsx,ts,tsx,html}": [
+    "pnpm prettier:check",
+    "pnpm -r --filter='@verify/webapp' exec eslint"
+  ]
+}

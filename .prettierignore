@@ -1,0 +1,9 @@
+dist
+build
+.vercel
+packages/api/generated
+pnpm-lock.yaml
+pnpm-workspace.yaml
+.next
+.turbo
+design-system

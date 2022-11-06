@@ -1,0 +1,20 @@
+fragment LinkItem on Link {
+  id
+  signature
+  createdAt
+  data {
+    address
+    redirect
+    short
+  }
+  openGraph {
+    title
+    description
+    image
+  }
+}
+query Links($address: String) {
+  links(address: $address) {
+    ...LinkItem
+  }
+}

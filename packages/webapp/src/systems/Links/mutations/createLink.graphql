@@ -1,0 +1,5 @@
+mutation CreateLink($input: DataInput!) {
+  createLink(input: $input) {
+    ...LinkItem
+  }
+}

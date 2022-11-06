@@ -1,0 +1,5 @@
+mutation UpsertProfile($input: DataInput!) {
+  profile(input: $input) {
+    ...ProfileItem
+  }
+}

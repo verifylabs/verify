@@ -1,0 +1,15 @@
+fragment ProfileItem on Profile {
+  id
+  createdAt
+  updatedAt
+  data {
+    address
+    username
+    profilePicture
+  }
+}
+query Profile($address: String) {
+  profile(address: $address) {
+    ...ProfileItem
+  }
+}

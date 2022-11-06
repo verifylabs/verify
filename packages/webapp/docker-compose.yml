@@ -1,0 +1,19 @@
+# This docker compose is just use locally for development and testing.
+version: "3"
+
+services:
+  verify-database:
+    image: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${DB_ROOT_USER:-root}
+      MONGO_INITDB_ROOT_PASSWORD: ${DB_ROOT_PASS:-123456}
+      MONGO_INITDB_USERNAME: ${DB_USER:-user}
+      MONGO_INITDB_PASSWORD: ${DB_PASS:-123456}
+      MONGO_INITDB_DATABASE: ${DB_NAME:-verify}
+    volumes:
+      - ./scripts/init-mongo.sh:/docker-entrypoint-initdb.d/init-mongo.sh
+      - verify-mongodb-volume:/data
+    ports:
+      - "27017:27017"
+volumes:
+  verify-mongodb-volume:

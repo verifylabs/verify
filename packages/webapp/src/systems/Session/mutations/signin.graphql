@@ -1,0 +1,5 @@
+mutation SignIn($input: DataInput!) {
+  signin(input: $input) {
+    ...SessionItem
+  }
+}

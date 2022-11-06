@@ -1,0 +1,12 @@
+fragment SessionItem on SessionPayload {
+  token
+  data {
+    date
+    address
+  }
+}
+query Session {
+  session {
+    ...SessionItem
+  }
+}
