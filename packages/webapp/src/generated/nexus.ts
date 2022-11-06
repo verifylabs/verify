@@ -3,8 +3,8 @@
  * Do not make changes to this file directly
  */
 
-import type { Context } from "./../graphql/context";
-import type { core } from "nexus";
+import type { Context } from './../graphql/context';
+import type { core } from 'nexus';
 declare global {
   interface NexusGenCustomInputMethods<TypeName extends string> {
     /**
@@ -43,7 +43,7 @@ declare global {
 export interface NexusGenInputs {
   DataInput: {
     // input type
-    data: NexusGenScalars["JSON"]; // JSON!
+    data: NexusGenScalars['JSON']; // JSON!
     signature: string; // String!
   };
 }
@@ -63,8 +63,8 @@ export interface NexusGenScalars {
 export interface NexusGenObjects {
   Link: {
     // root type
-    createdAt: NexusGenScalars["DateTime"]; // DateTime!
-    data: NexusGenRootTypes["LinkData"]; // LinkData!
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    data: NexusGenRootTypes['LinkData']; // LinkData!
     id: string; // String!
     signature: string; // String!
   };
@@ -78,16 +78,16 @@ export interface NexusGenObjects {
   OpenGraph: {
     // root type
     description: string; // String!
-    image: NexusGenScalars["JSON"]; // JSON!
+    image: NexusGenScalars['JSON']; // JSON!
     title: string; // String!
   };
   Profile: {
     // root type
-    createdAt: NexusGenScalars["DateTime"]; // DateTime!
-    data: NexusGenRootTypes["ProfileData"]; // ProfileData!
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    data: NexusGenRootTypes['ProfileData']; // ProfileData!
     id: string; // String!
     signature: string; // String!
-    updatedAt: NexusGenScalars["DateTime"]; // DateTime!
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
   };
   ProfileData: {
     // root type
@@ -98,8 +98,8 @@ export interface NexusGenObjects {
   Query: {};
   Report: {
     // root type
-    createdAt: NexusGenScalars["DateTime"]; // DateTime!
-    data: NexusGenRootTypes["ReportData"]; // ReportData!
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    data: NexusGenRootTypes['ReportData']; // ReportData!
     id: string; // String!
     signature: string; // String!
   };
@@ -119,7 +119,7 @@ export interface NexusGenObjects {
   };
   SessionPayload: {
     // root type
-    data?: NexusGenRootTypes["SessionData"] | null; // SessionData
+    data?: NexusGenRootTypes['SessionData'] | null; // SessionData
     token?: string | null; // String
   };
 }
@@ -135,10 +135,10 @@ export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars;
 export interface NexusGenFieldTypes {
   Link: {
     // field return type
-    createdAt: NexusGenScalars["DateTime"]; // DateTime!
-    data: NexusGenRootTypes["LinkData"]; // LinkData!
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    data: NexusGenRootTypes['LinkData']; // LinkData!
     id: string; // String!
-    openGraph: NexusGenRootTypes["OpenGraph"] | null; // OpenGraph
+    openGraph: NexusGenRootTypes['OpenGraph'] | null; // OpenGraph
     signature: string; // String!
   };
   LinkData: {
@@ -149,25 +149,25 @@ export interface NexusGenFieldTypes {
   };
   Mutation: {
     // field return type
-    createLink: NexusGenRootTypes["Link"]; // Link!
-    profile: NexusGenRootTypes["Profile"]; // Profile!
-    report: NexusGenRootTypes["ReportInfo"] | null; // ReportInfo
-    signin: NexusGenRootTypes["SessionPayload"] | null; // SessionPayload
-    signout: NexusGenRootTypes["SessionPayload"] | null; // SessionPayload
+    createLink: NexusGenRootTypes['Link']; // Link!
+    profile: NexusGenRootTypes['Profile']; // Profile!
+    report: NexusGenRootTypes['ReportInfo'] | null; // ReportInfo
+    signin: NexusGenRootTypes['SessionPayload'] | null; // SessionPayload
+    signout: NexusGenRootTypes['SessionPayload'] | null; // SessionPayload
   };
   OpenGraph: {
     // field return type
     description: string; // String!
-    image: NexusGenScalars["JSON"]; // JSON!
+    image: NexusGenScalars['JSON']; // JSON!
     title: string; // String!
   };
   Profile: {
     // field return type
-    createdAt: NexusGenScalars["DateTime"]; // DateTime!
-    data: NexusGenRootTypes["ProfileData"]; // ProfileData!
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    data: NexusGenRootTypes['ProfileData']; // ProfileData!
     id: string; // String!
     signature: string; // String!
-    updatedAt: NexusGenScalars["DateTime"]; // DateTime!
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
   };
   ProfileData: {
     // field return type
@@ -177,17 +177,17 @@ export interface NexusGenFieldTypes {
   };
   Query: {
     // field return type
-    link: NexusGenRootTypes["Link"] | null; // Link
-    links: NexusGenRootTypes["Link"][]; // [Link!]!
-    profile: NexusGenRootTypes["Profile"] | null; // Profile
-    reportInfo: NexusGenRootTypes["ReportInfo"] | null; // ReportInfo
-    searchLinks: NexusGenRootTypes["Link"][]; // [Link!]!
-    session: NexusGenRootTypes["SessionPayload"] | null; // SessionPayload
+    link: NexusGenRootTypes['Link'] | null; // Link
+    links: NexusGenRootTypes['Link'][]; // [Link!]!
+    profile: NexusGenRootTypes['Profile'] | null; // Profile
+    reportInfo: NexusGenRootTypes['ReportInfo'] | null; // ReportInfo
+    searchLinks: NexusGenRootTypes['Link'][]; // [Link!]!
+    session: NexusGenRootTypes['SessionPayload'] | null; // SessionPayload
   };
   Report: {
     // field return type
-    createdAt: NexusGenScalars["DateTime"]; // DateTime!
-    data: NexusGenRootTypes["ReportData"]; // ReportData!
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    data: NexusGenRootTypes['ReportData']; // ReportData!
     id: string; // String!
     signature: string; // String!
   };
@@ -207,7 +207,7 @@ export interface NexusGenFieldTypes {
   };
   SessionPayload: {
     // field return type
-    data: NexusGenRootTypes["SessionData"] | null; // SessionData
+    data: NexusGenRootTypes['SessionData'] | null; // SessionData
     token: string | null; // String
   };
 }
@@ -215,80 +215,80 @@ export interface NexusGenFieldTypes {
 export interface NexusGenFieldTypeNames {
   Link: {
     // field return type name
-    createdAt: "DateTime";
-    data: "LinkData";
-    id: "String";
-    openGraph: "OpenGraph";
-    signature: "String";
+    createdAt: 'DateTime';
+    data: 'LinkData';
+    id: 'String';
+    openGraph: 'OpenGraph';
+    signature: 'String';
   };
   LinkData: {
     // field return type name
-    address: "String";
-    redirect: "String";
-    short: "String";
+    address: 'String';
+    redirect: 'String';
+    short: 'String';
   };
   Mutation: {
     // field return type name
-    createLink: "Link";
-    profile: "Profile";
-    report: "ReportInfo";
-    signin: "SessionPayload";
-    signout: "SessionPayload";
+    createLink: 'Link';
+    profile: 'Profile';
+    report: 'ReportInfo';
+    signin: 'SessionPayload';
+    signout: 'SessionPayload';
   };
   OpenGraph: {
     // field return type name
-    description: "String";
-    image: "JSON";
-    title: "String";
+    description: 'String';
+    image: 'JSON';
+    title: 'String';
   };
   Profile: {
     // field return type name
-    createdAt: "DateTime";
-    data: "ProfileData";
-    id: "String";
-    signature: "String";
-    updatedAt: "DateTime";
+    createdAt: 'DateTime';
+    data: 'ProfileData';
+    id: 'String';
+    signature: 'String';
+    updatedAt: 'DateTime';
   };
   ProfileData: {
     // field return type name
-    address: "String";
-    profilePicture: "String";
-    username: "String";
+    address: 'String';
+    profilePicture: 'String';
+    username: 'String';
   };
   Query: {
     // field return type name
-    link: "Link";
-    links: "Link";
-    profile: "Profile";
-    reportInfo: "ReportInfo";
-    searchLinks: "Link";
-    session: "SessionPayload";
+    link: 'Link';
+    links: 'Link';
+    profile: 'Profile';
+    reportInfo: 'ReportInfo';
+    searchLinks: 'Link';
+    session: 'SessionPayload';
   };
   Report: {
     // field return type name
-    createdAt: "DateTime";
-    data: "ReportData";
-    id: "String";
-    signature: "String";
+    createdAt: 'DateTime';
+    data: 'ReportData';
+    id: 'String';
+    signature: 'String';
   };
   ReportData: {
     // field return type name
-    short: "String";
-    url: "String";
+    short: 'String';
+    url: 'String';
   };
   ReportInfo: {
     // field return type name
-    reports: "Int";
+    reports: 'Int';
   };
   SessionData: {
     // field return type name
-    address: "String";
-    date: "String";
+    address: 'String';
+    date: 'String';
   };
   SessionPayload: {
     // field return type name
-    data: "SessionData";
-    token: "String";
+    data: 'SessionData';
+    token: 'String';
   };
 }
 
@@ -296,19 +296,19 @@ export interface NexusGenArgTypes {
   Mutation: {
     createLink: {
       // args
-      input: NexusGenInputs["DataInput"]; // DataInput!
+      input: NexusGenInputs['DataInput']; // DataInput!
     };
     profile: {
       // args
-      input: NexusGenInputs["DataInput"]; // DataInput!
+      input: NexusGenInputs['DataInput']; // DataInput!
     };
     report: {
       // args
-      input: NexusGenInputs["DataInput"]; // DataInput!
+      input: NexusGenInputs['DataInput']; // DataInput!
     };
     signin: {
       // args
-      input: NexusGenInputs["DataInput"]; // DataInput!
+      input: NexusGenInputs['DataInput']; // DataInput!
     };
   };
   Query: {
@@ -386,19 +386,17 @@ export interface NexusGenTypes {
   scalarNames: NexusGenScalarNames;
   unionNames: NexusGenUnionNames;
   allInputTypes:
-    | NexusGenTypes["inputNames"]
-    | NexusGenTypes["enumNames"]
-    | NexusGenTypes["scalarNames"];
+    | NexusGenTypes['inputNames']
+    | NexusGenTypes['enumNames']
+    | NexusGenTypes['scalarNames'];
   allOutputTypes:
-    | NexusGenTypes["objectNames"]
-    | NexusGenTypes["enumNames"]
-    | NexusGenTypes["unionNames"]
-    | NexusGenTypes["interfaceNames"]
-    | NexusGenTypes["scalarNames"];
-  allNamedTypes:
-    | NexusGenTypes["allInputTypes"]
-    | NexusGenTypes["allOutputTypes"];
-  abstractTypes: NexusGenTypes["interfaceNames"] | NexusGenTypes["unionNames"];
+    | NexusGenTypes['objectNames']
+    | NexusGenTypes['enumNames']
+    | NexusGenTypes['unionNames']
+    | NexusGenTypes['interfaceNames']
+    | NexusGenTypes['scalarNames'];
+  allNamedTypes: NexusGenTypes['allInputTypes'] | NexusGenTypes['allOutputTypes'];
+  abstractTypes: NexusGenTypes['interfaceNames'] | NexusGenTypes['unionNames'];
   abstractTypeMembers: NexusGenAbstractTypeMembers;
   objectsUsingAbstractStrategyIsTypeOf: NexusGenObjectsUsingAbstractStrategyIsTypeOf;
   abstractsUsingStrategyResolveType: NexusGenAbstractsUsingStrategyResolveType;
@@ -408,14 +406,8 @@ export interface NexusGenTypes {
 declare global {
   interface NexusGenPluginTypeConfig<TypeName extends string> {}
   interface NexusGenPluginInputTypeConfig<TypeName extends string> {}
-  interface NexusGenPluginFieldConfig<
-    TypeName extends string,
-    FieldName extends string
-  > {}
-  interface NexusGenPluginInputFieldConfig<
-    TypeName extends string,
-    FieldName extends string
-  > {}
+  interface NexusGenPluginFieldConfig<TypeName extends string, FieldName extends string> {}
+  interface NexusGenPluginInputFieldConfig<TypeName extends string, FieldName extends string> {}
   interface NexusGenPluginSchemaConfig {}
   interface NexusGenPluginArgConfig {}
 }
